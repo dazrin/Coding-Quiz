@@ -5,6 +5,10 @@ var questionContainerElement = document.getElementById('question-container');
 var questionElement = document.getElementById('question');
 var answerButtonsElement = document.getElementById('answer-buttons');
 var gameClock = document.getElementById('game-clock');
+var messageDiv = document.getElementById('message');
+
+// variables
+var secondsLeft = 200;
 
 //variables questions and to hold which question to show
 var shuffledQuestions;
@@ -14,9 +18,34 @@ startBtn.addEventListener('click', startGame);
 nextBtn.addEventListener('click', () => {
     currentQuestionIndex++;
     setNextQuestion();
-})
+});
 
+//Sets timer to decrement every second
+//Displays an alert when time is up
+function setTime() {
+  var timeInterval = setInterval(function () {
+      secondsLeft--;
+      gameClock.textContent = "Timer " + secondsLeft;
 
+      if (secondsLeft === 0) {
+          clearInterval(timeInterval);
+          alert("Out of Time");
+            score += secondsLeft * .1;
+            score = score.toFixed(2);
+          
+      }
+
+      else if (i === questions.length) {
+          clearInterval(timeInterval);
+      }
+  }, 1000)
+  return (score)
+}
+
+//Starts the quiz
+//Hides start button
+//Shuffles the questions
+//Shows the question at index 0
 function startGame() {
     startBtn.classList.add('hide');
     shuffledQuestions = questions.sort(() => Math.random() - .5);
@@ -25,11 +54,19 @@ function startGame() {
     setNextQuestion();
 }
 
-function setNextQuestion() {
+//Resets the 'right' or 'wrong' css state
+//Shows the next question
+function setNextQuestion() { 
     resetState();
     showQuestion(shuffledQuestions[currentQuestionIndex]);
 }
 
+//Question element text is set to the current question
+//For each answer, create a button; set the button text to the answer text
+//For each button, give it a class of 'btn'
+//If the answer is correct, set the dataclass to 'correct'
+//Add event listeners for each button to select answer on click
+//Append newly created buttons to answerButtonsElement 
 function showQuestion(question) {
   questionElement.innerText = question.question;
   question.answers.forEach(answer => {
@@ -44,6 +81,9 @@ function showQuestion(question) {
   })
 }
 
+//clears all css status on the page
+//hide the next button
+//if there are buttons appended to the answer button element, remove them
 function resetState() {
     clearStatusClass(document.body);
     nextBtn.classList.add('hide');
@@ -52,9 +92,15 @@ function resetState() {
   }
 }
 
+//set variable for the event target
+//set variable to contain the correct data class of the button selected
+//set 'correct' status to affect the bg color of the page
+//set each button that was created in the answerButton list to have the 'correct' data class
+//if the user hasn't reached the last question, hide the 'next' button
+//if the user has reached the last question, show the start button and replace the 'start' text with 'restart'
 function selectAnswer(e) {
-    const selectedButton = e.target;
-    const correct = selectedButton.dataset.correct;
+    var selectedButton = e.target;
+    var correct = selectedButton.dataset.correct;
     setStatusClass(document.body, correct);
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct);
@@ -67,6 +113,9 @@ function selectAnswer(e) {
     }
 }
 
+//clear the status class of the current element
+//if the element has a 'correct' data class, add the 'correct' class to the element
+//otherwise, add the 'wrong' class to the element's class list
 function setStatusClass(element, correct) {
     clearStatusClass(element);
     if(correct) {
@@ -76,10 +125,21 @@ function setStatusClass(element, correct) {
     }
 }
 
+//remove 'wrong' and 'correct' classes from the element
 function clearStatusClass(element) {
     element.classList.remove('correct');
     element.classList.remove('wrong');
 }
+
+//When the start button is pressed,
+//set the next question
+//start the timer
+//hide the opening message
+document.getElementById("start-btn").addEventListener("click", setNextQuestion);
+document.getElementById("start-btn").addEventListener("click", setTime);
+document.getElementById("start-btn").addEventListener("click", function() {
+  messageDiv.textContent = "";
+});
 
 const questions = [
     {

@@ -21,6 +21,11 @@ body {
     background-color: hsl(var(--hue), 100%, 20%);
 }
 
+.quiz-title {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+
 body.correct {
     --hue: var(--hue-correct);
 }
@@ -38,11 +43,19 @@ body.wrong {
     box-shadow: 0 0 10px 2px;
 }
 
+#game-clock-container {
+color: white;
+}
+
 .btn-grid {
     display: grid;
     grid-template-columns: repeat(2, auto);
     gap: 10px;
     margin: 20px 0;
+}
+
+.btn-secondary {
+    color: white;
 }
 
 .btn {
