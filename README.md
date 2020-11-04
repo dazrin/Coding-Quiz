@@ -16,11 +16,11 @@ This application tests your javascript knowledge by asking a series of questions
 > Website URL: https://dazrin.github.io/Coding-Quiz/
   
 ## Instructions
-< WIP >
+When you start the quiz, the timer will begin and you will be given a series of questions to answer related to javascript knowledge. When you select the correct answer, the page and button will be highlighted green, and if you select an incorrect answer, the button and page will be highlighted red. The timer will subtract time whenever you answer a question incorrectly (still WIP) and the timer will stop and display an "Out of time" alert when the timer reaches 0. Once the quiz is over, you can enter your name on the highscores list (WIP) and can look at it anytime you click the "Highscores" button.
 
 ## Screenshot
 
-![CodingQuizScreenshot](https://i.imgur.com/RwSJAXL.png "A webpage featuring a password generator application")
+![CodingQuizScreenshot](https://i.imgur.com/Jaq1o1B.png "A webpage featuring a password generator application")
 
 
 ## Credits
